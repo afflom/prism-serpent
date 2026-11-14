@@ -1,0 +1,6 @@
+{
+  "name": "Prism Serpent: Neon Sovereign",
+  "description": "A formally modeled third-person 3D neon serpent game built with the UOR Foundation Prism SDK, featuring competitive NPC arena battles, special relic pickups, live leaderboards, and a multi-biome open-world exploration mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

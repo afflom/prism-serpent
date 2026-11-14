@@ -1,0 +1,77 @@
+\begin{lexlean}{Foundation.Leaderboard.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+definition{name: tierBronze, parameters: [], result: Nat, body: 0, executable: true}
+definition{name: tierSilver, parameters: [], result: Nat, body: 1, executable: true}
+definition{name: tierGold, parameters: [], result: Nat, body: 2, executable: true}
+definition{name: tierDiamond, parameters: [], result: Nat, body: 3, executable: true}
+definition{name: tierSovereign, parameters: [], result: Nat, body: 4, executable: true}
+
+definition{
+  name: classifyLeagueTier,
+  parameters: [eloRating : Nat],
+  result: Nat,
+  body: (if (1800 <=? eloRating) then 4 else (if (1550 <=? eloRating) then 3 else (if (1350 <=? eloRating) then 2 else (if (1150 <=? eloRating) then 1 else 0)))),
+  executable: true
+}
+
+definition{
+  name: computeEloGain,
+  parameters: [placementRank : Nat, eliminations : Nat, shrinesAttuned : Nat],
+  result: Nat,
+  body: ((if (placementRank =? 1) then 42 else (if (placementRank <=? 3) then 24 else (if (placementRank <=? 5) then 10 else 0))) + ((prim multiply eliminations 8 : Nat) + (prim multiply shrinesAttuned 6 : Nat))),
+  executable: true
+}
+
+definition{
+  name: computeEloPenalty,
+  parameters: [placementRank : Nat],
+  result: Nat,
+  body: (if (6 <=? placementRank) then 14 else 0),
+  executable: true
+}
+
+definition{
+  name: computeUpdatedEloRating,
+  parameters: [currentElo : Nat, placementRank : Nat, eliminations : Nat, shrinesAttuned : Nat],
+  result: Nat,
+  body: (prim subtract (currentElo + (computeEloGain placementRank eliminations shrinesAttuned)) (computeEloPenalty placementRank) : Nat),
+  executable: true
+}
+
+definition{
+  name: computePlacementBonusPoints,
+  parameters: [placementRank : Nat],
+  result: Nat,
+  body: (if (placementRank =? 1) then 500 else (if (placementRank =? 2) then 300 else (if (placementRank =? 3) then 175 else 50))),
+  executable: true
+}
+
+definition{
+  name: verifyLeaderboardTierMonotonicity,
+  parameters: [],
+  result: Bool,
+  body: ((((classifyLeagueTier 1000) <? (classifyLeagueTier 1400)) && ((classifyLeagueTier 1400) <? (classifyLeagueTier 1850))) && (((computeUpdatedEloRating 1200 8 0 0) <? (computeUpdatedEloRating 1200 1 3 1)) && ((computePlacementBonusPoints 1) =? 500))),
+  executable: true
+}
+
+definition{
+  name: breaksLeaderboardTierMonotonicity,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyLeaderboardTierMonotonicity))),
+  executable: true
+}
+
+theorem{
+  name: leaderboardTierMonotonicityHolds,
+  parameters: [],
+  statement: ((breaksLeaderboardTierMonotonicity 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

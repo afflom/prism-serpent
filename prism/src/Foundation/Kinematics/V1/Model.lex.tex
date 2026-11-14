@@ -1,0 +1,70 @@
+\begin{lexlean}{Foundation.Kinematics.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+definition{name: cruiseSpeedCmPerSec, parameters: [], result: Nat, body: 1450, executable: true}
+definition{name: overdriveSpeedCmPerSec, parameters: [], result: Nat, body: 2350, executable: true}
+definition{name: hyperCoreSpeedCmPerSec, parameters: [], result: Nat, body: 2850, executable: true}
+definition{name: baseSegmentSpacingCm, parameters: [], result: Nat, body: 92, executable: true}
+definition{name: baseHeadRadiusCm, parameters: [], result: Nat, body: 78, executable: true}
+definition{name: maxHullVitalityPips, parameters: [], result: Nat, body: 3, executable: true}
+
+definition{
+  name: computeSerpentSpeedCmPerSec,
+  parameters: [isOverdrive : Bool, hasHyperCore : Bool, onSpeedPad : Bool],
+  result: Nat,
+  body: (if hasHyperCore then (if onSpeedPad then 3200 else (hyperCoreSpeedCmPerSec)) else (if isOverdrive then (if onSpeedPad then 2750 else (overdriveSpeedCmPerSec)) else (if onSpeedPad then 1950 else (cruiseSpeedCmPerSec)))),
+  executable: true
+}
+
+definition{
+  name: computeTurnRateMilliRadPerSec,
+  parameters: [segmentCount : Nat, isOverdrive : Bool],
+  result: Nat,
+  body: (if (120 <=? segmentCount) then (if isOverdrive then 2450 else 2850) else (if (50 <=? segmentCount) then (if isOverdrive then 2850 else 3300) else (if isOverdrive then 3250 else 3800))),
+  executable: true
+}
+
+definition{
+  name: computeSegmentSpacingCm,
+  parameters: [segmentCount : Nat],
+  result: Nat,
+  body: (if (100 <=? segmentCount) then 108 else (if (40 <=? segmentCount) then 98 else (baseSegmentSpacingCm))),
+  executable: true
+}
+
+definition{
+  name: computeBoostMassCostPerSec,
+  parameters: [isOverdrive : Bool, hasHyperCore : Bool, segmentCount : Nat],
+  result: Nat,
+  body: (if (isOverdrive && ((not hasHyperCore) && (10 <? segmentCount))) then 12 else 0),
+  executable: true
+}
+
+definition{
+  name: verifyKinematicsSpeedOrdering,
+  parameters: [],
+  result: Bool,
+  body: ((((computeSerpentSpeedCmPerSec false false false) <? (computeSerpentSpeedCmPerSec true false false)) && ((computeSerpentSpeedCmPerSec true false false) <? (computeSerpentSpeedCmPerSec false true false))) && (((computeBoostMassCostPerSec true true 50) =? 0) && ((computeBoostMassCostPerSec true false 8) =? 0))),
+  executable: true
+}
+
+definition{
+  name: breaksKinematicsSpeedOrdering,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyKinematicsSpeedOrdering))),
+  executable: true
+}
+
+theorem{
+  name: kinematicsSpeedOrderingHolds,
+  parameters: [],
+  statement: ((breaksKinematicsSpeedOrdering 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

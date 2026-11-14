@@ -1,0 +1,45 @@
+{
+  "schema": "prism/hosted-verification/1",
+  "server": "https://mcp.uor.foundation/",
+  "profile": {
+    "name": "prism-app",
+    "id": "1cf3dece40ddac370598574170a00eca44fb5243e297e179b455801def90c2c8"
+  },
+  "draft": "prism-app/289837f9316337da48155bfcb574587012dae58fb2b657994bfd45c36880f141",
+  "entrypoints": [
+    "src/PrismSerpent.lex.tex",
+    "src/Foundation/Architecture/V1/Model.lex.tex",
+    "src/Foundation/Design/V1/Model.lex.tex",
+    "src/Foundation/Features/V1/Model.lex.tex",
+    "src/Foundation/Security/V1/Model.lex.tex",
+    "src/Foundation/Quality/V1/Model.lex.tex",
+    "src/Foundation/Compliance/V1/Model.lex.tex",
+    "src/Foundation/Kinematics/V1/Model.lex.tex",
+    "src/Foundation/Pickups/V1/Model.lex.tex",
+    "src/Foundation/NpcBehavior/V1/Model.lex.tex",
+    "src/Foundation/OpenWorld/V1/Model.lex.tex",
+    "src/Foundation/Leaderboard/V1/Model.lex.tex"
+  ],
+  "verified_at": "2026-11-14T04:50:35.525Z",
+  "attestation_id": "b691de83f19e87f8c15e0dcbb01a5a314a76a6b3449e312306374791897f1ac9",
+  "build_id": "584c3c664530393456a604fdd72b72fec7545c3d73d93631983aa4e50ec8c6e0",
+  "keyid": "533449506003ca0c42744122318b69f5be32d74a2781e72b5c62855cac53bb54",
+  "modules": [
+    "Foundation.Architecture.V1.Model",
+    "Foundation.Bytes",
+    "Foundation.Compliance.V1.Model",
+    "Foundation.Design.V1.Model",
+    "Foundation.Features.V1.Model",
+    "Foundation.Kinematics.V1.Model",
+    "Foundation.Leaderboard.V1.Model",
+    "Foundation.NpcBehavior.V1.Model",
+    "Foundation.OpenWorld.V1.Model",
+    "Foundation.Pickups.V1.Model",
+    "Foundation.Quality.V1.Model",
+    "Foundation.Security.V1.Model",
+    "Foundation.View.Text.V1.Model",
+    "PrismSerpent"
+  ],
+  "semantic_id": "532f00c6233faa8d49a10b7221727db0c19b1b0e0f1b3f8d99c4a5944d6a2237",
+  "source_id": "3122fcfe2eec9bd3c5d560f3c0e34457c65e90f90b28d907ea7e5875c6dffce2"
+}

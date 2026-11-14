@@ -1,0 +1,66 @@
+\begin{lexlean}{Foundation.NpcBehavior.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+definition{name: archetypeForager, parameters: [], result: Nat, body: 0, executable: true}
+definition{name: archetypeInterceptor, parameters: [], result: Nat, body: 1, executable: true}
+definition{name: archetypeLeviathan, parameters: [], result: Nat, body: 2, executable: true}
+definition{name: archetypePackHunter, parameters: [], result: Nat, body: 3, executable: true}
+
+definition{name: intentEvadeHazard, parameters: [], result: Nat, body: 0, executable: true}
+definition{name: intentSeekOrbCluster, parameters: [], result: Nat, body: 1, executable: true}
+definition{name: intentCutOffTarget, parameters: [], result: Nat, body: 2, executable: true}
+definition{name: intentTerritorialOrbit, parameters: [], result: Nat, body: 3, executable: true}
+definition{name: intentSprintRelic, parameters: [], result: Nat, body: 4, executable: true}
+
+definition{
+  name: decideNpcIntentCode,
+  parameters: [archetype : Nat, hazardNear : Bool, relicDistanceMeters : Nat, targetDistanceMeters : Nat, segmentCount : Nat],
+  result: Nat,
+  body: (if hazardNear then 0 else (if ((archetype =? 1) && ((targetDistanceMeters <=? 28) && (16 <=? segmentCount))) then 2 else (if ((archetype =? 2) && (30 <=? segmentCount)) then 3 else (if ((archetype =? 3) && (relicDistanceMeters <=? 45)) then 4 else (if ((archetype =? 3) && (targetDistanceMeters <=? 22)) then 2 else 1))))),
+  executable: true
+}
+
+definition{
+  name: decideNpcShouldBoost,
+  parameters: [archetype : Nat, intentCode : Nat, segmentCount : Nat, tokenAvailable : Bool],
+  result: Bool,
+  body: (if (not tokenAvailable) then false else (if (segmentCount <=? 14) then false else (if (intentCode =? 2) then true else (if ((archetype =? 3) && (intentCode =? 4)) then true else false)))),
+  executable: true
+}
+
+definition{
+  name: computeChargeWindupMs,
+  parameters: [archetype : Nat],
+  result: Nat,
+  body: (if (archetype =? 1) then 450 else (if (archetype =? 3) then 380 else 550)),
+  executable: true
+}
+
+definition{
+  name: verifyFourDistinctNpcPolicies,
+  parameters: [],
+  result: Bool,
+  body: (((((decideNpcIntentCode 0 false 30 20 35) =? 1) && ((decideNpcIntentCode 1 false 30 20 35) =? 2)) && (((decideNpcIntentCode 2 false 30 20 35) =? 3) && ((decideNpcIntentCode 3 false 30 20 35) =? 4))) && (((decideNpcIntentCode 1 true 10 10 40) =? 0) && (not (decideNpcShouldBoost 1 2 25 false)))),
+  executable: true
+}
+
+definition{
+  name: breaksFourDistinctNpcPolicies,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyFourDistinctNpcPolicies))),
+  executable: true
+}
+
+theorem{
+  name: fourDistinctNpcPoliciesHold,
+  parameters: [],
+  statement: ((breaksFourDistinctNpcPolicies 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

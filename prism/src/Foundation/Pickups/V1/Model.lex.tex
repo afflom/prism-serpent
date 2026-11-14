@@ -1,0 +1,79 @@
+\begin{lexlean}{Foundation.Pickups.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+definition{name: pickupKindEnergyOrb, parameters: [], result: Nat, body: 0, executable: true}
+definition{name: pickupKindHyperCore, parameters: [], result: Nat, body: 1, executable: true}
+definition{name: pickupKindMagnetPrism, parameters: [], result: Nat, body: 2, executable: true}
+definition{name: pickupKindPhaseCloak, parameters: [], result: Nat, body: 3, executable: true}
+definition{name: pickupKindChronoShard, parameters: [], result: Nat, body: 4, executable: true}
+definition{name: pickupKindApexCrown, parameters: [], result: Nat, body: 5, executable: true}
+definition{name: pickupKindRivalLootOrb, parameters: [], result: Nat, body: 6, executable: true}
+
+definition{
+  name: computePickupBasePoints,
+  parameters: [pickupKind : Nat],
+  result: Nat,
+  body: (if (pickupKind =? 0) then 15 else (if (pickupKind =? 1) then 90 else (if (pickupKind =? 2) then 85 else (if (pickupKind =? 3) then 95 else (if (pickupKind =? 4) then 110 else (if (pickupKind =? 5) then 250 else 40)))))),
+  executable: true
+}
+
+definition{
+  name: computePickupDurationMs,
+  parameters: [pickupKind : Nat],
+  result: Nat,
+  body: (if (pickupKind =? 1) then 6500 else (if (pickupKind =? 2) then 8500 else (if (pickupKind =? 3) then 6000 else (if (pickupKind =? 4) then 10000 else 0)))),
+  executable: true
+}
+
+definition{
+  name: computePickupGrowthUnits,
+  parameters: [pickupKind : Nat, hasChronoShard : Bool],
+  result: Nat,
+  body: (if (pickupKind =? 0) then (if hasChronoShard then 24 else 12) else (if (pickupKind =? 5) then (if hasChronoShard then 96 else 48) else (if (pickupKind =? 6) then (if hasChronoShard then 44 else 22) else (if hasChronoShard then 32 else 16)))),
+  executable: true
+}
+
+definition{
+  name: computeAwardedScore,
+  parameters: [pickupKind : Nat, hasChronoShard : Bool, comboTier : Nat],
+  result: Nat,
+  body: (if hasChronoShard then ((prim multiply (computePickupBasePoints pickupKind) 2 : Nat) + (prim multiply comboTier 10 : Nat)) else ((computePickupBasePoints pickupKind) + (prim multiply comboTier 5 : Nat))),
+  executable: true
+}
+
+definition{
+  name: computeMagnetPullRadiusCm,
+  parameters: [hasMagnetPrism : Bool],
+  result: Nat,
+  body: (if hasMagnetPrism then 1450 else 240),
+  executable: true
+}
+
+definition{
+  name: verifyChronoAmplifiesScoreAndGrowth,
+  parameters: [],
+  result: Bool,
+  body: ((((computeAwardedScore 0 false 2) <? (computeAwardedScore 0 true 2)) && ((computePickupGrowthUnits 0 false) <? (computePickupGrowthUnits 0 true))) && (((computeMagnetPullRadiusCm false) <? (computeMagnetPullRadiusCm true)) && ((computePickupBasePoints 5) =? 250))),
+  executable: true
+}
+
+definition{
+  name: breaksChronoAmplifiesScoreAndGrowth,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyChronoAmplifiesScoreAndGrowth))),
+  executable: true
+}
+
+theorem{
+  name: chronoAmplifiesScoreAndGrowthHolds,
+  parameters: [],
+  statement: ((breaksChronoAmplifiesScoreAndGrowth 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

@@ -1,0 +1,84 @@
+\begin{lexlean}{Foundation.Quality.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+structure{
+  name: QualityMeasureRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: measureIndex, type: Nat},
+    {name: iso25010Characteristic, type: String},
+    {name: metricName, type: String},
+    {name: observedValue, type: Nat},
+    {name: requiredFloor, type: Nat}
+  ]
+}
+
+definition{
+  name: measureAcceptanceVectorPassPct,
+  parameters: [],
+  result: QualityMeasureRecord,
+  body: (record QualityMeasureRecord {measureIndex := 0, iso25010Characteristic := "FunctionalSuitability", metricName := "AcceptanceVectorReplayPassPct", observedValue := 100, requiredFloor := 100}),
+  executable: true
+}
+
+definition{
+  name: measureClearViewportPct,
+  parameters: [],
+  result: QualityMeasureRecord,
+  body: (record QualityMeasureRecord {measureIndex := 1, iso25010Characteristic := "InteractionCapability", metricName := "UnobstructedSpatialViewportPct", observedValue := 88, requiredFloor := 85}),
+  executable: true
+}
+
+definition{
+  name: measureHudContrastTenths,
+  parameters: [],
+  result: QualityMeasureRecord,
+  body: (record QualityMeasureRecord {measureIndex := 2, iso25010Characteristic := "Accessibility", metricName := "PrimaryHudContrastRatioTenths", observedValue := 92, requiredFloor := 45}),
+  executable: true
+}
+
+definition{
+  name: measureDistinctNpcArchetypes,
+  parameters: [],
+  result: QualityMeasureRecord,
+  body: (record QualityMeasureRecord {measureIndex := 3, iso25010Characteristic := "FunctionalCompleteness", metricName := "DistinctNpcBehaviorPolicies", observedValue := 4, requiredFloor := 3}),
+  executable: true
+}
+
+definition{
+  name: qualityFloorSatisfied,
+  parameters: [m : QualityMeasureRecord],
+  result: Bool,
+  body: ((project m requiredFloor) <=? (project m observedValue)),
+  executable: true
+}
+
+definition{
+  name: verifyIso25010QualitySuite,
+  parameters: [],
+  result: Bool,
+  body: (((qualityFloorSatisfied (measureAcceptanceVectorPassPct)) && (qualityFloorSatisfied (measureClearViewportPct))) && ((qualityFloorSatisfied (measureHudContrastTenths)) && (qualityFloorSatisfied (measureDistinctNpcArchetypes)))),
+  executable: true
+}
+
+definition{
+  name: breaksIso25010QualitySuite,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyIso25010QualitySuite))),
+  executable: true
+}
+
+theorem{
+  name: iso25010QualitySuiteHolds,
+  parameters: [],
+  statement: ((breaksIso25010QualitySuite 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

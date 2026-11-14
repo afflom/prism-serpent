@@ -1,0 +1,72 @@
+\begin{lexlean}{Foundation.OpenWorld.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+definition{name: zoneNexusBowl, parameters: [], result: Nat, body: 0, executable: true}
+definition{name: zoneCobaltDunes, parameters: [], result: Nat, body: 1, executable: true}
+definition{name: zoneCrystallineSpire, parameters: [], result: Nat, body: 2, executable: true}
+definition{name: zoneSolarisRift, parameters: [], result: Nat, body: 3, executable: true}
+definition{name: zoneSanctumRing, parameters: [], result: Nat, body: 4, executable: true}
+definition{name: totalFrontierShrines, parameters: [], result: Nat, body: 5, executable: true}
+definition{name: openWorldRadiusMeters, parameters: [], result: Nat, body: 112, executable: true}
+definition{name: arenaRadiusMeters, parameters: [], result: Nat, body: 68, executable: true}
+
+definition{
+  name: classifyFrontierBiome,
+  parameters: [radiusMeters : Nat, quadrant : Nat],
+  result: Nat,
+  body: (if (radiusMeters <=? 26) then 0 else (if (82 <=? radiusMeters) then 4 else (if (quadrant =? 0) then 1 else (if (quadrant =? 1) then 2 else (if (quadrant =? 2) then 3 else 4))))),
+  executable: true
+}
+
+definition{
+  name: computeRawDiscoveryPct,
+  parameters: [visitedBiomesCount : Nat, attunedShrinesCount : Nat, relicsFoundCount : Nat],
+  result: Nat,
+  body: (((prim multiply visitedBiomesCount 10 : Nat) + (prim multiply attunedShrinesCount 8 : Nat)) + (prim multiply relicsFoundCount 2 : Nat)),
+  executable: true
+}
+
+definition{
+  name: computeWorldDiscoveryPct,
+  parameters: [visitedBiomesCount : Nat, attunedShrinesCount : Nat, relicsFoundCount : Nat],
+  result: Nat,
+  body: (if (100 <=? (computeRawDiscoveryPct visitedBiomesCount attunedShrinesCount relicsFoundCount)) then 100 else (computeRawDiscoveryPct visitedBiomesCount attunedShrinesCount relicsFoundCount)),
+  executable: true
+}
+
+definition{
+  name: computeShrineAttuneBonus,
+  parameters: [attunedShrinesCount : Nat],
+  result: Nat,
+  body: (if (5 <=? attunedShrinesCount) then 600 else (150 + (prim multiply attunedShrinesCount 75 : Nat))),
+  executable: true
+}
+
+definition{
+  name: verifyOpenWorldTopologyAndDiscovery,
+  parameters: [],
+  result: Bool,
+  body: (((((classifyFrontierBiome 12 0) =? 0) && ((classifyFrontierBiome 50 1) =? 2)) && (((classifyFrontierBiome 90 0) =? 4) && ((computeWorldDiscoveryPct 5 5 5) =? 100))) && ((computeWorldDiscoveryPct 5 5 12) <=? 100)),
+  executable: true
+}
+
+definition{
+  name: breaksOpenWorldTopologyAndDiscovery,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyOpenWorldTopologyAndDiscovery))),
+  executable: true
+}
+
+theorem{
+  name: openWorldTopologyAndDiscoveryHold,
+  parameters: [],
+  statement: ((breaksOpenWorldTopologyAndDiscovery 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

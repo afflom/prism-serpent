@@ -1,0 +1,180 @@
+\begin{lexlean}{Foundation.Architecture.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+structure{
+  name: StandardReference,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: standardIndex, type: Nat},
+    {name: standardId, type: String},
+    {name: edition, type: String}
+  ]
+}
+
+structure{
+  name: StakeholderRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: index, type: Nat},
+    {name: name, type: String},
+    {name: concernSummary, type: String}
+  ]
+}
+
+structure{
+  name: ComponentRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: index, type: Nat},
+    {name: name, type: String},
+    {name: responsibility, type: String},
+    {name: deterministicKernel, type: Bool}
+  ]
+}
+
+structure{
+  name: ArchitectureEdgeRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: edgeIndex, type: Nat},
+    {name: fromComponent, type: Nat},
+    {name: toComponent, type: Nat}
+  ]
+}
+
+definition{
+  name: standardIso42010,
+  parameters: [],
+  result: StandardReference,
+  body: (record StandardReference {standardIndex := 0, standardId := "ISO-IEC-IEEE-42010", edition := "2022"}),
+  executable: true
+}
+
+definition{
+  name: standardIso25010,
+  parameters: [],
+  result: StandardReference,
+  body: (record StandardReference {standardIndex := 1, standardId := "ISO-IEC-25010", edition := "2023"}),
+  executable: true
+}
+
+definition{
+  name: standardIso27034,
+  parameters: [],
+  result: StandardReference,
+  body: (record StandardReference {standardIndex := 2, standardId := "ISO-IEC-27034-1", edition := "2011"}),
+  executable: true
+}
+
+definition{
+  name: stakeholderArenaCompetitor,
+  parameters: [],
+  result: StakeholderRecord,
+  body: (record StakeholderRecord {index := 0, name := "Arena Competitor", concernSummary := "Responsive third-person steering, fair NPC archetypes, special relic clarity, and tamper-evident leaderboards."}),
+  executable: true
+}
+
+definition{
+  name: stakeholderOpenWorldExplorer,
+  parameters: [],
+  result: StakeholderRecord,
+  body: (record StakeholderRecord {index := 1, name := "Open-World Explorer", concernSummary := "Seamless traversal across five frontier biomes, shrine attunement progression, and atmospheric wayfinding."}),
+  executable: true
+}
+
+definition{
+  name: stakeholderPrismAuditor,
+  parameters: [],
+  result: StakeholderRecord,
+  body: (record StakeholderRecord {index := 2, name := "Prism Formal Verifier", concernSummary := "Every rule, domain invariant, and facet record compiles from LexLean with zero unproved axioms."}),
+  executable: true
+}
+
+definition{
+  name: componentSpecJudge,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 0, name := "PrismSpecJudge", responsibility := "Evaluates canonical 7-field tactical and world state into proved serpent directives.", deterministicKernel := true}),
+  executable: true
+}
+
+definition{
+  name: componentKinematicsCore,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 1, name := "SerpentKinematicsCore", responsibility := "Computes arc-length spine spacing, turn rates, boost shedding, and collision radii.", deterministicKernel := true}),
+  executable: true
+}
+
+definition{
+  name: componentNpcPlanner,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 2, name := "NpcArchetypePlanner", responsibility := "Executes four distinct rival policies: Forager, Interceptor, Orbiter, and Relic Hunter.", deterministicKernel := true}),
+  executable: true
+}
+
+definition{
+  name: componentOpenWorldAtlas,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 3, name := "OpenWorldAtlas", responsibility := "Governs five frontier biomes, monolith shrine attunement, and world discovery percentage.", deterministicKernel := true}),
+  executable: true
+}
+
+definition{
+  name: componentLeaderboardLedger,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 4, name := "CompetitiveLeaderboardLedger", responsibility := "Computes arena rank bonuses, Elo deltas, sovereign tiers, and canonical run receipts.", deterministicKernel := true}),
+  executable: true
+}
+
+definition{
+  name: componentSpatialViewport,
+  parameters: [],
+  result: ComponentRecord,
+  body: (record ComponentRecord {index := 5, name := "ThreeSpatialViewport", responsibility := "Renders third-person PBR serpent, instanced orbs, relics, shrines, and spatial audio.", deterministicKernel := false}),
+  executable: true
+}
+
+definition{
+  name: architectureComponentCount,
+  parameters: [],
+  result: Nat,
+  body: 6,
+  executable: true
+}
+
+definition{
+  name: verifyArchitectureComplete,
+  parameters: [],
+  result: Bool,
+  body: (((project (componentSpecJudge) deterministicKernel) && (project (componentKinematicsCore) deterministicKernel)) && (((project (componentNpcPlanner) deterministicKernel) && (project (componentOpenWorldAtlas) deterministicKernel)) && ((project (componentLeaderboardLedger) deterministicKernel) && ((architectureComponentCount) =? 6)))),
+  executable: true
+}
+
+definition{
+  name: breaksArchitectureComplete,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyArchitectureComplete))),
+  executable: true
+}
+
+theorem{
+  name: architectureCompleteHolds,
+  parameters: [],
+  statement: ((breaksArchitectureComplete 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

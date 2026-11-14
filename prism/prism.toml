@@ -1,0 +1,11 @@
+[application]
+name = "prism-serpent"
+version = "0.1.0"
+description = "Decides the tactical serpent directive, relic resonance state, rival interception posture, and open-world shrine response across the Neon Sovereign arena and frontier biomes."
+
+[model]
+source = "src"
+watch = ["src/**/*.lex.tex", "language/**/*.toml", "lexlean.toml"]
+
+# Deny by default: an empty set grants the holo nothing.
+[capabilities]

@@ -1,0 +1,6 @@
+name = "PrismPrismSerpent"
+version = "0.1.0"
+defaultTargets = ["PrismPrismSerpent"]
+
+[[lean_lib]]
+name = "PrismPrismSerpent"

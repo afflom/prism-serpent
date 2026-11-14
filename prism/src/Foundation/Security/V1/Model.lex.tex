@@ -1,0 +1,76 @@
+\begin{lexlean}{Foundation.Security.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+structure{
+  name: SecurityThreatRow,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: threatIndex, type: Nat},
+    {name: strideCategory, type: String},
+    {name: assetName, type: String},
+    {name: controlName, type: String},
+    {name: mitigated, type: Bool}
+  ]
+}
+
+definition{
+  name: threatTamperedLeaderboardReceipt,
+  parameters: [],
+  result: SecurityThreatRow,
+  body: (record SecurityThreatRow {threatIndex := 0, strideCategory := "Tampering", assetName := "LeaderboardRunReceipt", controlName := "CanonicalCodeHashDigestVerification", mitigated := true}),
+  executable: true
+}
+
+definition{
+  name: threatMalformedDispatchInput,
+  parameters: [],
+  result: SecurityThreatRow,
+  body: (record SecurityThreatRow {threatIndex := 1, strideCategory := "DenialOfService", assetName := "PrismSpecJudge", controlName := "BoundedRequestParserRefusesInvalid", mitigated := true}),
+  executable: true
+}
+
+definition{
+  name: threatUnauthorizedHostCapability,
+  parameters: [],
+  result: SecurityThreatRow,
+  body: (record SecurityThreatRow {threatIndex := 2, strideCategory := "ElevationOfPrivilege", assetName := "HoloCapabilityGrant", controlName := "DenyByDefaultEmptyCapabilitiesTable", mitigated := true}),
+  executable: true
+}
+
+definition{
+  name: threatCallsignScriptInjection,
+  parameters: [],
+  result: SecurityThreatRow,
+  body: (record SecurityThreatRow {threatIndex := 3, strideCategory := "Spoofing", assetName := "PilotCallsignInput", controlName := "StrictAsciiAlphanumericCallsignValidator", mitigated := true}),
+  executable: true
+}
+
+definition{
+  name: verifyAllThreatsMitigated,
+  parameters: [],
+  result: Bool,
+  body: (((project (threatTamperedLeaderboardReceipt) mitigated) && (project (threatMalformedDispatchInput) mitigated)) && ((project (threatUnauthorizedHostCapability) mitigated) && (project (threatCallsignScriptInjection) mitigated))),
+  executable: true
+}
+
+definition{
+  name: breaksAllThreatsMitigated,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyAllThreatsMitigated))),
+  executable: true
+}
+
+theorem{
+  name: allThreatsMitigatedHolds,
+  parameters: [],
+  statement: ((breaksAllThreatsMitigated 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

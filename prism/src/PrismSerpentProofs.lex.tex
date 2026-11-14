@@ -1,0 +1,380 @@
+\begin{lexlean}{PrismSerpentProofs}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\importmodule{PrismSerpent}
+\title{Text application model}
+\begin{semanticmodule}
+definition{
+  name: breaksProp001,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: (((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && ((project request pickup) =? (PrismSerpent::pickupApexCrown))) && (not ((PrismSerpent::judge request) =? (PrismSerpent::answerRelicAscension))))
+}
+
+theorem{
+  name: prop001Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp001 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp001
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksProp002,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: ((((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && ((project request pickup) =? (PrismSerpent::pickupPhaseCloak))) && (60 <=? (project request threat))) && (not ((PrismSerpent::judge request) =? (PrismSerpent::answerEvasivePhase))))
+}
+
+theorem{
+  name: prop002Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp002 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp002
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksProp003,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: ((((((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && ((project request mode) =? (PrismSerpent::modeOpenWorld))) && ((project request zone) =? (PrismSerpent::zoneSanctumRing))) && ((project request threat) <=? 30)) && ((project request pickup) =? (PrismSerpent::pickupEnergyOrb))) && (not ((PrismSerpent::judge request) =? (PrismSerpent::answerFrontierAttune))))
+}
+
+theorem{
+  name: prop003Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp003 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp003
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksProp004,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: (((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && (60 <=? (project request threat))) && ((PrismSerpent::judge request) =? (PrismSerpent::answerApexDominance)))
+}
+
+theorem{
+  name: prop004Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp004 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp004
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksProp005,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: (((((((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && ((project request mode) =? (PrismSerpent::modeArena))) && ((project request pickup) =? (PrismSerpent::pickupEnergyOrb))) && ((project request rival) =? (PrismSerpent::rivalPackHunter))) && ((project request boost) =? (PrismSerpent::boostCruise))) && (65 <=? (project request threat))) && (not ((PrismSerpent::judge request) =? (PrismSerpent::answerEvasivePhase))))
+}
+
+theorem{
+  name: prop005Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp005 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp005
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+
+definition{
+  name: breaksProp006,
+  parameters: [request : PrismSerpent::Request],
+  result: Bool,
+  body: (((((((((((project request mode) <? 2) && ((project request pickup) <? 6)) && ((project request rival) <? 5)) && ((project request zone) <? 5)) && ((project request boost) <? 2)) && (1 <=? (project request length))) && ((project request length) <=? 200)) && ((project request threat) <=? 100)) && ((project request mode) =? (PrismSerpent::modeOpenWorld))) && ((PrismSerpent::judge request) =? (PrismSerpent::answerApexDominance)))
+}
+
+theorem{
+  name: prop006Holds,
+  parameters: [request : PrismSerpent::Request],
+  statement: ((breaksProp006 request) = false),
+  proof: linear_arithmetic{
+    definitions: [
+      PrismSerpent::answerApexDominance,
+      PrismSerpent::answerChronoCascade,
+      PrismSerpent::answerEvasivePhase,
+      PrismSerpent::answerFrontierAttune,
+      PrismSerpent::answerHyperSurge,
+      PrismSerpent::answerInterceptCut,
+      PrismSerpent::answerMagnetHarvest,
+      PrismSerpent::answerRelicAscension,
+      PrismSerpent::answerSteadyForage,
+      PrismSerpent::answerTerritorialCoil,
+      PrismSerpent::boostCruise,
+      PrismSerpent::boostOverdrive,
+      PrismSerpent::judge,
+      PrismSerpent::modeArena,
+      PrismSerpent::modeOpenWorld,
+      PrismSerpent::pickupApexCrown,
+      PrismSerpent::pickupChronoShard,
+      PrismSerpent::pickupEnergyOrb,
+      PrismSerpent::pickupHyperCore,
+      PrismSerpent::pickupMagnetPrism,
+      PrismSerpent::pickupPhaseCloak,
+      PrismSerpent::rivalForager,
+      PrismSerpent::rivalInterceptor,
+      PrismSerpent::rivalLeviathan,
+      PrismSerpent::rivalNone,
+      PrismSerpent::rivalPackHunter,
+      PrismSerpent::rule1,
+      PrismSerpent::rule10,
+      PrismSerpent::rule11,
+      PrismSerpent::rule12,
+      PrismSerpent::rule2,
+      PrismSerpent::rule3,
+      PrismSerpent::rule4,
+      PrismSerpent::rule5,
+      PrismSerpent::rule6,
+      PrismSerpent::rule7,
+      PrismSerpent::rule8,
+      PrismSerpent::rule9,
+      PrismSerpent::zoneCobaltDunes,
+      PrismSerpent::zoneCrystallineSpire,
+      PrismSerpent::zoneNexusBowl,
+      PrismSerpent::zoneSanctumRing,
+      PrismSerpent::zoneSolarisRift,
+      breaksProp006
+    ]
+  },
+  axioms: [Quot.sound, propext]
+}
+\end{semanticmodule}
+\end{lexlean}

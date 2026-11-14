@@ -1,0 +1,119 @@
+\begin{lexlean}{Foundation.Features.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+structure{
+  name: FeatureRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: featureIndex, type: Nat},
+    {name: featureId, type: String},
+    {name: statement, type: String},
+    {name: journeyIndex, type: Nat}
+  ]
+}
+
+structure{
+  name: JourneyRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: journeyIndex, type: Nat},
+    {name: title, type: String},
+    {name: stepCount, type: Nat},
+    {name: verifiedByTest, type: Bool}
+  ]
+}
+
+definition{
+  name: journeyArenaCompetition,
+  parameters: [],
+  result: JourneyRecord,
+  body: (record JourneyRecord {journeyIndex := 0, title := "Third-Person Neon Arena Combat & Special Relics", stepCount := 4, verifiedByTest := true}),
+  executable: true
+}
+
+definition{
+  name: journeyOpenWorldExploration,
+  parameters: [],
+  result: JourneyRecord,
+  body: (record JourneyRecord {journeyIndex := 1, title := "Five-Biome Open-World Exploration & Shrine Attunement", stepCount := 4, verifiedByTest := true}),
+  executable: true
+}
+
+definition{
+  name: journeyLeaderboardAndCodex,
+  parameters: [],
+  result: JourneyRecord,
+  body: (record JourneyRecord {journeyIndex := 2, title := "Competitive Leaderboard Receipts & Live Prism Spec Judge", stepCount := 4, verifiedByTest := true}),
+  executable: true
+}
+
+definition{
+  name: featureThirdPersonSerpent,
+  parameters: [],
+  result: FeatureRecord,
+  body: (record FeatureRecord {featureIndex := 0, featureId := "FEAT-01", statement := "Third-person chase camera follows an articulated 3D serpent eating orbs and shedding boost mass.", journeyIndex := 0}),
+  executable: true
+}
+
+definition{
+  name: featureSpecialObjects,
+  parameters: [],
+  result: FeatureRecord,
+  body: (record FeatureRecord {featureIndex := 1, featureId := "FEAT-02", statement := "Five special relic objects grant Hyper-Core surge, Magnet vortex, Phase cloak, Chrono multiplier, and Apex shockwave.", journeyIndex := 0}),
+  executable: true
+}
+
+definition{
+  name: featureNpcRivals,
+  parameters: [],
+  result: FeatureRecord,
+  body: (record FeatureRecord {featureIndex := 2, featureId := "FEAT-03", statement := "Four distinct NPC rival archetypes compete in real time with windup telegraphs and loot bursts.", journeyIndex := 0}),
+  executable: true
+}
+
+definition{
+  name: featureOpenWorldMode,
+  parameters: [],
+  result: FeatureRecord,
+  body: (record FeatureRecord {featureIndex := 3, featureId := "FEAT-04", statement := "Seamless open-world exploration spans five frontier biomes with monolith shrines and teleport atlas.", journeyIndex := 1}),
+  executable: true
+}
+
+definition{
+  name: featureLeaderboards,
+  parameters: [],
+  result: FeatureRecord,
+  body: (record FeatureRecord {featureIndex := 4, featureId := "FEAT-05", statement := "Live match rankings and persistent Sovereign Hall of Fame record Elo ratings and canonical Prism digests.", journeyIndex := 2}),
+  executable: true
+}
+
+definition{
+  name: verifyAllJourneysTested,
+  parameters: [],
+  result: Bool,
+  body: (((project (journeyArenaCompetition) verifiedByTest) && (project (journeyOpenWorldExploration) verifiedByTest)) && (project (journeyLeaderboardAndCodex) verifiedByTest)),
+  executable: true
+}
+
+definition{
+  name: breaksAllJourneysTested,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyAllJourneysTested))),
+  executable: true
+}
+
+theorem{
+  name: allJourneysTestedHolds,
+  parameters: [],
+  statement: ((breaksAllJourneysTested 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}

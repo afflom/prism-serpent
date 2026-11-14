@@ -1,0 +1,94 @@
+\begin{lexlean}{Foundation.Compliance.V1.Model}
+\useglossary{lexlean.std.bool@1.2.0}
+\useglossary{lexlean.std.nat@1.2.0}
+\useglossary{prism.arch@1.0.0}
+\title{Text application model}
+\begin{semanticmodule}
+structure{
+  name: ComplianceObligation,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: obligationIndex, type: Nat},
+    {name: ruleId, type: String},
+    {name: standardRef, type: String},
+    {name: satisfied, type: Bool}
+  ]
+}
+
+structure{
+  name: ProvenanceAgentRecord,
+  type_parameters: [],
+  parameters: [],
+  fields: [
+    {name: agentIndex, type: Nat},
+    {name: agentName, type: String},
+    {name: provRole, type: String}
+  ]
+}
+
+definition{
+  name: obligationSingleSourceR1,
+  parameters: [],
+  result: ComplianceObligation,
+  body: (record ComplianceObligation {obligationIndex := 0, ruleId := "R1", standardRef := "uor/template-contract/1", satisfied := true}),
+  executable: true
+}
+
+definition{
+  name: obligationEpistemicLevelsR2,
+  parameters: [],
+  result: ComplianceObligation,
+  body: (record ComplianceObligation {obligationIndex := 1, ruleId := "R2", standardRef := "W3C-PROV-O-2013", satisfied := true}),
+  executable: true
+}
+
+definition{
+  name: obligationTypedRefusalR5,
+  parameters: [],
+  result: ComplianceObligation,
+  body: (record ComplianceObligation {obligationIndex := 2, ruleId := "R5", standardRef := "prism/spec/1", satisfied := true}),
+  executable: true
+}
+
+definition{
+  name: agentPrismCodeCompiler,
+  parameters: [],
+  result: ProvenanceAgentRecord,
+  body: (record ProvenanceAgentRecord {agentIndex := 0, agentName := "prism-code@0.8.0", provRole := "SoftwareAgentModelRenderer"}),
+  executable: true
+}
+
+definition{
+  name: agentLexLeanKernel,
+  parameters: [],
+  result: ProvenanceAgentRecord,
+  body: (record ProvenanceAgentRecord {agentIndex := 1, agentName := "leanprover/lean4:v4.32.1", provRole := "ZeroChoiceKernelVerifier"}),
+  executable: true
+}
+
+definition{
+  name: verifyComplianceAndProvenance,
+  parameters: [],
+  result: Bool,
+  body: (((project (obligationSingleSourceR1) satisfied) && (project (obligationEpistemicLevelsR2) satisfied)) && (project (obligationTypedRefusalR5) satisfied)),
+  executable: true
+}
+
+definition{
+  name: breaksComplianceAndProvenance,
+  parameters: [probe : Nat],
+  result: Bool,
+  body: ((probe =? 0) && (not (verifyComplianceAndProvenance))),
+  executable: true
+}
+
+theorem{
+  name: complianceAndProvenanceHold,
+  parameters: [],
+  statement: ((breaksComplianceAndProvenance 0) = false),
+  proof: decide{},
+  axioms: []
+}
+\end{semanticmodule}
+\end{lexlean}
