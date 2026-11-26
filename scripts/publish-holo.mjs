@@ -28,6 +28,7 @@ if (page !== 'authored') {
 
 const description = /^description\s*=\s*"([^"]*)"/m.exec(readFileSync(join(modelDir, 'prism.toml'), 'utf8'))?.[1] ?? '';
 const title = /<title>([^<]*)<\/title>/i.exec(readFileSync(join(modelDir, 'view', 'index.html'), 'utf8'))?.[1].trim();
+const text = (html) => html?.replace(/&(amp|lt|gt|quot|#39);/g, (_, e) => ({ amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'" })[e]);
 const slug = process.env.GITHUB_REPOSITORY;
 if (!slug) {
   console.error('GITHUB_REPOSITORY is not set: run this in GitHub Actions, or set it to owner/name');
@@ -38,7 +39,7 @@ const live = `https://${owner.toLowerCase()}.github.io/${name}/`;
 
 copyFileSync(join(modelDir, artifact), join(siteDir, 'app.holo'));
 const meta = {
-  name: title || name,
+  name: text(title) || name,
   purpose: description,
   live,
   repository: `https://github.com/${slug}`,
