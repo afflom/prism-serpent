@@ -1,1 +1,3 @@
 * text eol=lf
+# The game, built by `npm run build:view` as the page of the Prism holo.
+view/** linguist-generated=true

@@ -42,6 +42,26 @@ jobs:
       - name: Build site
         run: npm run build
 
+      # The same game, built as the page of the Prism holo (prism/view/): one
+      # self-contained script and stylesheet the verified holospace can carry.
+      # The Prism registry builds the holo from the committed prism/view/, so a
+      # game change should be committed with `npm run build:view` run again.
+      - name: Build the game as the holo's page
+        run: |
+          npm run build:view
+          if ! git diff --quiet -- prism/view; then
+            echo "::warning title=prism/view is stale::The committed holo page differs from this build of the game. Run npm run build:view and commit prism/view, so the Prism registry's source build carries the current game."
+          fi
+
+      - name: Check, build and verify the Prism holo
+        working-directory: prism
+        run: |
+          npx --yes prism-code@0.11.5 build --json > "$RUNNER_TEMP/holo-build.json" || { cat "$RUNNER_TEMP/holo-build.json"; exit 1; }
+          npx --yes prism-code@0.11.5 verify
+
+      - name: Publish app.holo and app.json beside the game
+        run: node scripts/publish-holo.mjs prism dist "$RUNNER_TEMP/holo-build.json"
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
