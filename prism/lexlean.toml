@@ -3,24 +3,11 @@ name = "prism-prism-serpent"
 language = "1.2"
 module_prefix = "PrismPrismSerpent"
 source_roots = ["src"]
-entrypoints = [
-  "src/PrismSerpent.lex.tex",
-  "src/Foundation/Architecture/V1/Model.lex.tex",
-  "src/Foundation/Design/V1/Model.lex.tex",
-  "src/Foundation/Features/V1/Model.lex.tex",
-  "src/Foundation/Security/V1/Model.lex.tex",
-  "src/Foundation/Quality/V1/Model.lex.tex",
-  "src/Foundation/Compliance/V1/Model.lex.tex",
-  "src/Foundation/Kinematics/V1/Model.lex.tex",
-  "src/Foundation/Pickups/V1/Model.lex.tex",
-  "src/Foundation/NpcBehavior/V1/Model.lex.tex",
-  "src/Foundation/OpenWorld/V1/Model.lex.tex",
-  "src/Foundation/Leaderboard/V1/Model.lex.tex"
-]
+entrypoints = ["src/Foundation/Architecture/V1/Model.lex.tex", "src/Foundation/Compliance/V1/Model.lex.tex", "src/Foundation/Design/V1/Model.lex.tex", "src/Foundation/Features/V1/Model.lex.tex", "src/Foundation/Kinematics/V1/Model.lex.tex", "src/Foundation/Leaderboard/V1/Model.lex.tex", "src/Foundation/NpcBehavior/V1/Model.lex.tex", "src/Foundation/OpenWorld/V1/Model.lex.tex", "src/Foundation/Pickups/V1/Model.lex.tex", "src/Foundation/Quality/V1/Model.lex.tex", "src/Foundation/Security/V1/Model.lex.tex", "src/PrismSerpent.lex.tex"]
 build_root = ".lexlean"
 lockfile = "lexlean.lock"
 lean_workspace = "."
-lean_toolchain = "leanprover/lean4:v4.32.1"
+lean_toolchain = "leanprover/lean4:v4.32.2"
 
 [[lexicon_source]]
 package = "lexlean.std.nat"
